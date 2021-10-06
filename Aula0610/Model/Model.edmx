@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AulaCast061021Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Aluno">
+          <Key>
+            <PropertyRef Name="Aluno_Id" />
+          </Key>
+          <Property Name="Aluno_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomeAluno" Type="varchar" MaxLength="50" />
+          <Property Name="Turma_Id" Type="int" />
+          <Property Name="Desconto" Type="float" />
+        </EntityType>
+        <EntityType Name="Curso">
+          <Key>
+            <PropertyRef Name="Curso_Id" />
+          </Key>
+          <Property Name="Curso_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Curso" Type="varchar" MaxLength="50" />
+          <Property Name="Mensalidade" Type="float" />
+        </EntityType>
+        <EntityType Name="DetTurma">
+          <Key>
+            <PropertyRef Name="DetTurma_Id" />
+          </Key>
+          <Property Name="DetTurma_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Turma_Id" Type="int" />
+          <Property Name="Aluno_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Instrutor">
+          <Key>
+            <PropertyRef Name="Instrutor_Id" />
+          </Key>
+          <Property Name="Instrutor_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Instrutor" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Turma">
+          <Key>
+            <PropertyRef Name="Turma_Id" />
+          </Key>
+          <Property Name="Turma_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Curso_Id" Type="int" />
+          <Property Name="Instrutor_Id" Type="int" />
+        </EntityType>
+        <Association Name="FK__DetTurma__Aluno___2E1BDC42">
+          <End Role="Aluno" Type="Self.Aluno" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DetTurma" Type="Self.DetTurma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aluno">
+              <PropertyRef Name="Aluno_Id" />
+            </Principal>
+            <Dependent Role="DetTurma">
+              <PropertyRef Name="Aluno_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetTurma__Turma___2F10007B">
+          <End Role="Turma" Type="Self.Turma" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DetTurma" Type="Self.DetTurma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turma">
+              <PropertyRef Name="Turma_Id" />
+            </Principal>
+            <Dependent Role="DetTurma">
+              <PropertyRef Name="Turma_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Turma__Curso_Id__2A4B4B5E">
+          <End Role="Curso" Type="Self.Curso" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Turma" Type="Self.Turma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="Curso_Id" />
+            </Principal>
+            <Dependent Role="Turma">
+              <PropertyRef Name="Curso_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Turma__Instrutor__2B3F6F97">
+          <End Role="Instrutor" Type="Self.Instrutor" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Turma" Type="Self.Turma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instrutor">
+              <PropertyRef Name="Instrutor_Id" />
+            </Principal>
+            <Dependent Role="Turma">
+              <PropertyRef Name="Instrutor_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AulaCast061021ModelStoreContainer">
+          <EntitySet Name="Aluno" EntityType="Self.Aluno" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Curso" EntityType="Self.Curso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetTurma" EntityType="Self.DetTurma" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Instrutor" EntityType="Self.Instrutor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Turma" EntityType="Self.Turma" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__DetTurma__Aluno___2E1BDC42" Association="Self.FK__DetTurma__Aluno___2E1BDC42">
+            <End Role="Aluno" EntitySet="Aluno" />
+            <End Role="DetTurma" EntitySet="DetTurma" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetTurma__Turma___2F10007B" Association="Self.FK__DetTurma__Turma___2F10007B">
+            <End Role="Turma" EntitySet="Turma" />
+            <End Role="DetTurma" EntitySet="DetTurma" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Turma__Curso_Id__2A4B4B5E" Association="Self.FK__Turma__Curso_Id__2A4B4B5E">
+            <End Role="Curso" EntitySet="Curso" />
+            <End Role="Turma" EntitySet="Turma" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Turma__Instrutor__2B3F6F97" Association="Self.FK__Turma__Instrutor__2B3F6F97">
+            <End Role="Instrutor" EntitySet="Instrutor" />
+            <End Role="Turma" EntitySet="Turma" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AulaCast061021Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Aluno">
+          <Key>
+            <PropertyRef Name="Aluno_Id" />
+          </Key>
+          <Property Name="Aluno_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeAluno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Turma_Id" Type="Int32" />
+          <Property Name="Desconto" Type="Double" />
+          <NavigationProperty Name="DetTurmas" Relationship="Self.FK__DetTurma__Aluno___2E1BDC42" FromRole="Aluno" ToRole="DetTurma" />
+        </EntityType>
+        <EntityType Name="Curso">
+          <Key>
+            <PropertyRef Name="Curso_Id" />
+          </Key>
+          <Property Name="Curso_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Curso1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mensalidade" Type="Double" />
+          <NavigationProperty Name="Turmas" Relationship="Self.FK__Turma__Curso_Id__2A4B4B5E" FromRole="Curso" ToRole="Turma" />
+        </EntityType>
+        <EntityType Name="DetTurma">
+          <Key>
+            <PropertyRef Name="DetTurma_Id" />
+          </Key>
+          <Property Name="DetTurma_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Turma_Id" Type="Int32" />
+          <Property Name="Aluno_Id" Type="Int32" />
+          <NavigationProperty Name="Aluno" Relationship="Self.FK__DetTurma__Aluno___2E1BDC42" FromRole="DetTurma" ToRole="Aluno" />
+          <NavigationProperty Name="Turma" Relationship="Self.FK__DetTurma__Turma___2F10007B" FromRole="DetTurma" ToRole="Turma" />
+        </EntityType>
+        <EntityType Name="Instrutor">
+          <Key>
+            <PropertyRef Name="Instrutor_Id" />
+          </Key>
+          <Property Name="Instrutor_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Instrutor1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Turmas" Relationship="Self.FK__Turma__Instrutor__2B3F6F97" FromRole="Instrutor" ToRole="Turma" />
+        </EntityType>
+        <EntityType Name="Turma">
+          <Key>
+            <PropertyRef Name="Turma_Id" />
+          </Key>
+          <Property Name="Turma_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Curso_Id" Type="Int32" />
+          <Property Name="Instrutor_Id" Type="Int32" />
+          <NavigationProperty Name="Curso" Relationship="Self.FK__Turma__Curso_Id__2A4B4B5E" FromRole="Turma" ToRole="Curso" />
+          <NavigationProperty Name="DetTurmas" Relationship="Self.FK__DetTurma__Turma___2F10007B" FromRole="Turma" ToRole="DetTurma" />
+          <NavigationProperty Name="Instrutor" Relationship="Self.FK__Turma__Instrutor__2B3F6F97" FromRole="Turma" ToRole="Instrutor" />
+        </EntityType>
+        <Association Name="FK__DetTurma__Aluno___2E1BDC42">
+          <End Role="Aluno" Type="Self.Aluno" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DetTurma" Type="Self.DetTurma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aluno">
+              <PropertyRef Name="Aluno_Id" />
+            </Principal>
+            <Dependent Role="DetTurma">
+              <PropertyRef Name="Aluno_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Turma__Curso_Id__2A4B4B5E">
+          <End Role="Curso" Type="Self.Curso" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Turma" Type="Self.Turma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="Curso_Id" />
+            </Principal>
+            <Dependent Role="Turma">
+              <PropertyRef Name="Curso_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetTurma__Turma___2F10007B">
+          <End Role="Turma" Type="Self.Turma" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DetTurma" Type="Self.DetTurma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turma">
+              <PropertyRef Name="Turma_Id" />
+            </Principal>
+            <Dependent Role="DetTurma">
+              <PropertyRef Name="Turma_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Turma__Instrutor__2B3F6F97">
+          <End Role="Instrutor" Type="Self.Instrutor" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Turma" Type="Self.Turma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instrutor">
+              <PropertyRef Name="Instrutor_Id" />
+            </Principal>
+            <Dependent Role="Turma">
+              <PropertyRef Name="Instrutor_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ConexaoBD" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alunoes" EntityType="Self.Aluno" />
+          <EntitySet Name="Cursoes" EntityType="Self.Curso" />
+          <EntitySet Name="DetTurmas" EntityType="Self.DetTurma" />
+          <EntitySet Name="Instrutors" EntityType="Self.Instrutor" />
+          <EntitySet Name="Turmas" EntityType="Self.Turma" />
+          <AssociationSet Name="FK__DetTurma__Aluno___2E1BDC42" Association="Self.FK__DetTurma__Aluno___2E1BDC42">
+            <End Role="Aluno" EntitySet="Alunoes" />
+            <End Role="DetTurma" EntitySet="DetTurmas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Turma__Curso_Id__2A4B4B5E" Association="Self.FK__Turma__Curso_Id__2A4B4B5E">
+            <End Role="Curso" EntitySet="Cursoes" />
+            <End Role="Turma" EntitySet="Turmas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetTurma__Turma___2F10007B" Association="Self.FK__DetTurma__Turma___2F10007B">
+            <End Role="Turma" EntitySet="Turmas" />
+            <End Role="DetTurma" EntitySet="DetTurmas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Turma__Instrutor__2B3F6F97" Association="Self.FK__Turma__Instrutor__2B3F6F97">
+            <End Role="Instrutor" EntitySet="Instrutors" />
+            <End Role="Turma" EntitySet="Turmas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AulaCast061021ModelStoreContainer" CdmEntityContainer="ConexaoBD">
+          <EntitySetMapping Name="Alunoes">
+            <EntityTypeMapping TypeName="AulaCast061021Model.Aluno">
+              <MappingFragment StoreEntitySet="Aluno">
+                <ScalarProperty Name="Aluno_Id" ColumnName="Aluno_Id" />
+                <ScalarProperty Name="NomeAluno" ColumnName="NomeAluno" />
+                <ScalarProperty Name="Turma_Id" ColumnName="Turma_Id" />
+                <ScalarProperty Name="Desconto" ColumnName="Desconto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cursoes">
+            <EntityTypeMapping TypeName="AulaCast061021Model.Curso">
+              <MappingFragment StoreEntitySet="Curso">
+                <ScalarProperty Name="Curso_Id" ColumnName="Curso_Id" />
+                <ScalarProperty Name="Curso1" ColumnName="Curso" />
+                <ScalarProperty Name="Mensalidade" ColumnName="Mensalidade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetTurmas">
+            <EntityTypeMapping TypeName="AulaCast061021Model.DetTurma">
+              <MappingFragment StoreEntitySet="DetTurma">
+                <ScalarProperty Name="DetTurma_Id" ColumnName="DetTurma_Id" />
+                <ScalarProperty Name="Turma_Id" ColumnName="Turma_Id" />
+                <ScalarProperty Name="Aluno_Id" ColumnName="Aluno_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Instrutors">
+            <EntityTypeMapping TypeName="AulaCast061021Model.Instrutor">
+              <MappingFragment StoreEntitySet="Instrutor">
+                <ScalarProperty Name="Instrutor_Id" ColumnName="Instrutor_Id" />
+                <ScalarProperty Name="Instrutor1" ColumnName="Instrutor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Turmas">
+            <EntityTypeMapping TypeName="AulaCast061021Model.Turma">
+              <MappingFragment StoreEntitySet="Turma">
+                <ScalarProperty Name="Turma_Id" ColumnName="Turma_Id" />
+                <ScalarProperty Name="Curso_Id" ColumnName="Curso_Id" />
+                <ScalarProperty Name="Instrutor_Id" ColumnName="Instrutor_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
