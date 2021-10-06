@@ -30,64 +30,52 @@ namespace Aula0610
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.label1 = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.txbCurso = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.txbMensalidade = new System.Windows.Forms.TextBox();
             this.btnSalvar = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.dgvfunc = new System.Windows.Forms.DataGridView();
-            this.aulaCast061021DataSet = new Aula0610.AulaCast061021DataSet();
             this.cursoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.aulaCast061021DataSet = new Aula0610.AulaCast061021DataSet();
             this.cursoTableAdapter = new Aula0610.AulaCast061021DataSetTableAdapters.CursoTableAdapter();
-            this.cursoIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.Curso_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cursoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mensalidadeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvfunc)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aulaCast061021DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cursoBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aulaCast061021DataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Sylfaen", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(80, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 28);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Curso";
             // 
             // txbCurso
             // 
-            this.txbCurso.Location = new System.Drawing.Point(151, 22);
+            this.txbCurso.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txbCurso.Location = new System.Drawing.Point(90, 22);
             this.txbCurso.Name = "txbCurso";
-            this.txbCurso.Size = new System.Drawing.Size(508, 26);
+            this.txbCurso.Size = new System.Drawing.Size(569, 26);
             this.txbCurso.TabIndex = 0;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Sylfaen", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(19, 59);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(126, 28);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Mensalidade";
+            this.txbCurso.Tag = "";
+            this.txbCurso.Text = "Curso";
             // 
             // txbMensalidade
             // 
-            this.txbMensalidade.Location = new System.Drawing.Point(151, 62);
+            this.txbMensalidade.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txbMensalidade.Location = new System.Drawing.Point(90, 62);
             this.txbMensalidade.Name = "txbMensalidade";
-            this.txbMensalidade.Size = new System.Drawing.Size(508, 26);
+            this.txbMensalidade.Size = new System.Drawing.Size(569, 26);
             this.txbMensalidade.TabIndex = 1;
+            this.txbMensalidade.Text = "Mensalidade";
             // 
             // btnSalvar
             // 
-            this.btnSalvar.Location = new System.Drawing.Point(151, 108);
+            this.btnSalvar.Location = new System.Drawing.Point(24, 106);
             this.btnSalvar.Name = "btnSalvar";
-            this.btnSalvar.Size = new System.Drawing.Size(171, 37);
+            this.btnSalvar.Size = new System.Drawing.Size(211, 37);
             this.btnSalvar.TabIndex = 2;
             this.btnSalvar.Text = "Salvar";
             this.btnSalvar.UseVisualStyleBackColor = true;
@@ -96,9 +84,9 @@ namespace Aula0610
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
-            this.btnDelete.Location = new System.Drawing.Point(328, 108);
+            this.btnDelete.Location = new System.Drawing.Point(241, 106);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(171, 37);
+            this.btnDelete.Size = new System.Drawing.Size(211, 37);
             this.btnDelete.TabIndex = 3;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -106,9 +94,9 @@ namespace Aula0610
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(505, 108);
+            this.btnCancelar.Location = new System.Drawing.Point(458, 106);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(154, 37);
+            this.btnCancelar.Size = new System.Drawing.Size(201, 37);
             this.btnCancelar.TabIndex = 4;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -122,40 +110,60 @@ namespace Aula0610
             this.dgvfunc.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvfunc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvfunc.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.cursoIdDataGridViewTextBoxColumn,
+            this.Curso_Id,
             this.cursoDataGridViewTextBoxColumn,
             this.mensalidadeDataGridViewTextBoxColumn});
             this.dgvfunc.DataSource = this.cursoBindingSource;
-            this.dgvfunc.Location = new System.Drawing.Point(24, 166);
+            this.dgvfunc.Location = new System.Drawing.Point(24, 161);
             this.dgvfunc.Name = "dgvfunc";
             this.dgvfunc.ReadOnly = true;
             this.dgvfunc.RowHeadersWidth = 62;
             this.dgvfunc.RowTemplate.Height = 28;
-            this.dgvfunc.Size = new System.Drawing.Size(635, 269);
+            this.dgvfunc.Size = new System.Drawing.Size(635, 291);
             this.dgvfunc.TabIndex = 5;
             this.dgvfunc.DoubleClick += new System.EventHandler(this.dgvfunc_DoubleClick);
-            // 
-            // aulaCast061021DataSet
-            // 
-            this.aulaCast061021DataSet.DataSetName = "AulaCast061021DataSet";
-            this.aulaCast061021DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // cursoBindingSource
             // 
             this.cursoBindingSource.DataMember = "Curso";
             this.cursoBindingSource.DataSource = this.aulaCast061021DataSet;
             // 
+            // aulaCast061021DataSet
+            // 
+            this.aulaCast061021DataSet.DataSetName = "AulaCast061021DataSet";
+            this.aulaCast061021DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // cursoTableAdapter
             // 
             this.cursoTableAdapter.ClearBeforeFill = true;
             // 
-            // cursoIdDataGridViewTextBoxColumn
+            // pictureBox1
             // 
-            this.cursoIdDataGridViewTextBoxColumn.DataPropertyName = "Curso_Id";
-            this.cursoIdDataGridViewTextBoxColumn.HeaderText = "Curso_Id";
-            this.cursoIdDataGridViewTextBoxColumn.MinimumWidth = 8;
-            this.cursoIdDataGridViewTextBoxColumn.Name = "cursoIdDataGridViewTextBoxColumn";
-            this.cursoIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(24, 50);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(57, 50);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(24, 12);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(60, 50);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 7;
+            this.pictureBox2.TabStop = false;
+            // 
+            // Curso_Id
+            // 
+            this.Curso_Id.DataPropertyName = "Curso_Id";
+            this.Curso_Id.HeaderText = "Curso_Id";
+            this.Curso_Id.MinimumWidth = 8;
+            this.Curso_Id.Name = "Curso_Id";
+            this.Curso_Id.ReadOnly = true;
             // 
             // cursoDataGridViewTextBoxColumn
             // 
@@ -177,33 +185,32 @@ namespace Aula0610
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 458);
+            this.ClientSize = new System.Drawing.Size(685, 473);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.dgvfunc);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnSalvar);
             this.Controls.Add(this.txbMensalidade);
             this.Controls.Add(this.txbCurso);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Aula0610";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvfunc)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aulaCast061021DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cursoBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aulaCast061021DataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txbCurso;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txbMensalidade;
         private System.Windows.Forms.Button btnSalvar;
         private System.Windows.Forms.Button btnDelete;
@@ -212,7 +219,9 @@ namespace Aula0610
         private AulaCast061021DataSet aulaCast061021DataSet;
         private System.Windows.Forms.BindingSource cursoBindingSource;
         private AulaCast061021DataSetTableAdapters.CursoTableAdapter cursoTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cursoIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Curso_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cursoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn mensalidadeDataGridViewTextBoxColumn;
     }

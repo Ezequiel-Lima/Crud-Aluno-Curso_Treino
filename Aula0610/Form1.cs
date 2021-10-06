@@ -51,6 +51,8 @@ namespace Aula0610
         {
             if (dgvfunc.CurrentCell.RowIndex != -1)
             {
+                txbCurso.Text = "";
+                txbMensalidade.Text = "";
                 idCurso = Convert.ToInt32(dgvfunc.CurrentRow.Cells[0].Value);
                 curso = db.Cursoes.Where(x => x.Curso_Id == idCurso).FirstOrDefault();
                 txbCurso.Text = curso.Curso1;
