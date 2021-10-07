@@ -12,19 +12,23 @@ using System.Windows.Forms;
 
 namespace Aula0610
 {
-    public partial class Form1 : Form
+    public partial class formPrincipal : Form
     {
-        public Form1()
+        public formPrincipal()
         {
             InitializeComponent();
         }
 
         ConexaoBD db = new ConexaoBD();
         Curso curso = new Curso();
+        Instrutor instrutor = new Instrutor();
+        int idInstrutor = 0;
         int idCurso = 0;
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'aulaCast061021DataSet1.Instrutor' table. You can move, or remove it, as needed.
+            this.instrutorTableAdapter.Fill(this.aulaCast061021DataSet1.Instrutor);
             // TODO: This line of code loads data into the 'aulaCast061021DataSet.Curso' table. You can move, or remove it, as needed.
             this.cursoTableAdapter.Fill(this.aulaCast061021DataSet.Curso);
         }
@@ -84,6 +88,55 @@ namespace Aula0610
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             LimparDados();
+        }
+
+        private void btnSalvar2_Click(object sender, EventArgs e)
+        {
+            instrutor.Instrutor1 = txbProfessor.Text.Trim();
+
+            if (idInstrutor > 0)
+                //inserir o using System.Data.Entity por causa do EntityState
+                db.Entry(instrutor).State = EntityState.Modified;
+            else
+            {
+                db.Instrutors.Add(instrutor);
+            }
+
+            db.SaveChanges();
+
+            MessageBox.Show("Registro Salvo");
+        }
+
+        private void btnDelete2_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Quer apagar este Registro ?", "Apagar?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+
+                db.Instrutors.Remove(instrutor);
+                db.SaveChanges();
+
+                LimparDados();
+                MessageBox.Show("Registro Apagado");
+            }
+        }
+
+        private void Cancelar2_Click(object sender, EventArgs e)
+        {
+            txbProfessor.Text = string.Empty;
+            btnDelete2.Enabled = false;
+            idInstrutor = 0;
+        }
+
+        private void dgvfunc2_DoubleClick(object sender, EventArgs e)
+        {
+            if (dgvfunc2.CurrentCell.RowIndex != -1)
+            {
+                txbProfessor.Text = "";
+                idInstrutor = Convert.ToInt32(dgvfunc2.CurrentRow.Cells[0].Value);
+                instrutor = db.Instrutors.Where(x => x.Instrutor_Id == idInstrutor).FirstOrDefault();
+                txbProfessor.Text = instrutor.Instrutor1;   
+            }
+            btnDelete2.Enabled = true;
         }
 
     }
