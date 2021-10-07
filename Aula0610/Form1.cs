@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -25,12 +26,18 @@ namespace Aula0610
         int idInstrutor = 0;
         int idCurso = 0;
 
+        public void SetDataInGridView()
+        {
+           dgvfunc.DataSource = db.Cursoes.ToList();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'aulaCast061021DataSet1.Instrutor' table. You can move, or remove it, as needed.
             this.instrutorTableAdapter.Fill(this.aulaCast061021DataSet1.Instrutor);
             // TODO: This line of code loads data into the 'aulaCast061021DataSet.Curso' table. You can move, or remove it, as needed.
             this.cursoTableAdapter.Fill(this.aulaCast061021DataSet.Curso);
+            SetDataInGridView();
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
@@ -39,15 +46,18 @@ namespace Aula0610
             curso.Mensalidade = Convert.ToInt32(txbMensalidade.Text.Trim());
          
             if (idCurso > 0)
+            {
                 //inserir o using System.Data.Entity por causa do EntityState
                 db.Entry(curso).State = EntityState.Modified;
+            }
             else
             {
                 db.Cursoes.Add(curso);
             }
 
             db.SaveChanges();
-            
+            SetDataInGridView();
+
             MessageBox.Show("Registro Salvo");
         }
 
@@ -55,8 +65,6 @@ namespace Aula0610
         {
             if (dgvfunc.CurrentCell.RowIndex != -1)
             {
-                txbCurso.Text = "";
-                txbMensalidade.Text = "";
                 idCurso = Convert.ToInt32(dgvfunc.CurrentRow.Cells[0].Value);
                 curso = db.Cursoes.Where(x => x.Curso_Id == idCurso).FirstOrDefault();
                 txbCurso.Text = curso.Curso1;
