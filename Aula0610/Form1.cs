@@ -27,17 +27,19 @@ namespace Aula0610
         int idCurso = 0;
 
         public void SetDataInGridView()
-        {
-           dgvfunc.DataSource = db.Cursoes.ToList();
+        { 
+            this.cursoTableAdapter.Fill(this.aulaCast061021DataSet.Curso);
+            this.instrutorTableAdapter.Fill(this.aulaCast061021DataSet1.Instrutor);
+            dgvfunc.Refresh();
+            dgvfunc.Update();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        public void Form1_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'aulaCast061021DataSet1.Instrutor' table. You can move, or remove it, as needed.
             this.instrutorTableAdapter.Fill(this.aulaCast061021DataSet1.Instrutor);
             // TODO: This line of code loads data into the 'aulaCast061021DataSet.Curso' table. You can move, or remove it, as needed.
             this.cursoTableAdapter.Fill(this.aulaCast061021DataSet.Curso);
-            SetDataInGridView();
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
@@ -80,6 +82,7 @@ namespace Aula0610
 
                 db.Cursoes.Remove(curso);
                 db.SaveChanges();
+                SetDataInGridView();
 
                 LimparDados();
                 MessageBox.Show("Registro Apagado");
@@ -111,6 +114,7 @@ namespace Aula0610
             }
 
             db.SaveChanges();
+            SetDataInGridView();
 
             MessageBox.Show("Registro Salvo");
         }
@@ -122,6 +126,7 @@ namespace Aula0610
 
                 db.Instrutors.Remove(instrutor);
                 db.SaveChanges();
+                SetDataInGridView();
 
                 LimparDados();
                 MessageBox.Show("Registro Apagado");
